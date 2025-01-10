@@ -17,9 +17,9 @@ export default function Home() {
 
   useEffect(() => {
     // Animate elements on scroll
-    const sections = gsap.utils.toArray(".animate-section");
+    const sections = gsap.utils.toArray<HTMLElement>(".animate-section");
 
-    sections.forEach((section: Element) => {
+    sections.forEach((section) => {
       gsap.from(section, {
         opacity: 0,
         y: 50,
@@ -62,7 +62,6 @@ export default function Home() {
 
       <Footer />
 
-      {/* Floating Action Button */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className="fixed bottom-8 right-8 p-4 bg-white dark:bg-gray-800 rounded-full 
