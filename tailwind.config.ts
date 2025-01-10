@@ -1,6 +1,5 @@
-import type { Config } from "tailwindcss";
-
-export default {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,10 +8,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#007AFF",
+        secondary: "#6B7280",
+        dark: "#111827",
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)"],
+      },
+      animation: {
+        "fade-in": "fadeIn 0.5s ease-in-out",
       },
     },
   },
   plugins: [],
-} satisfies Config;
+};
