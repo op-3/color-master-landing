@@ -20,21 +20,6 @@ export const generateContrastColor = (hexColor: string): string => {
   return brightness > 128 ? "#000000" : "#FFFFFF";
 };
 
-export const debounce = <F extends (...args: any[]) => any>(
-  func: F,
-  wait: number
-): ((...args: Parameters<F>) => ReturnType<F> | undefined) => {
-  let timeoutId: NodeJS.Timeout | undefined = undefined;
-
-  return (...args: Parameters<F>) => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-
-    timeoutId = setTimeout(() => func(...args), wait);
-  };
-};
-
 export const copyToClipboard = async (text: string): Promise<boolean> => {
   try {
     await navigator.clipboard.writeText(text);
