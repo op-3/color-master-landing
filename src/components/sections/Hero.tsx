@@ -1,61 +1,64 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import gsap from "gsap";
 import Image from "next/image";
 
 const Hero = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".hero-text", {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power4.out",
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
-
   const handleDownload = () => {
     window.location.href =
       "https://github.com/op-3/Color-Master-Pro/releases/download/Color/Color-Master-Pro-v1.0.0.zip";
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
+  };
+
   return (
-    <div ref={heroRef} className="min-h-screen flex items-center relative">
+    <div className="min-h-screen flex items-center relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
-          <div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <motion.h1
-              className="hero-text text-4xl md:text-6xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              variants={itemVariants}
+              className="text-4xl md:text-6xl font-bold mb-6"
             >
               Extract Colors from Any Website with
               <span className="gradient-text"> Ease</span>
             </motion.h1>
             <motion.p
-              className="hero-text text-xl text-gray-600 dark:text-gray-300 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              variants={itemVariants}
+              className="text-xl text-gray-600 dark:text-gray-300 mb-8"
             >
               Color Master Pro helps designers and developers extract, analyze,
               and manage color palettes from any website instantly.
             </motion.p>
             <motion.div
-              className="hero-text flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-4"
             >
               <button
                 onClick={handleDownload}
@@ -99,18 +102,16 @@ const Hero = () => {
                 View on GitHub
               </a>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Demo Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
             className="relative"
           >
             <div className="relative w-full h-[500px]">
-              {" "}
-              {/* تحديد ارتفاع ثابت */}
               <Image
                 src="/images/icon16.png"
                 alt="Color Master Pro Demo"
