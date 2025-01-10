@@ -20,17 +20,18 @@ export const generateContrastColor = (hexColor: string): string => {
   return brightness > 128 ? "#000000" : "#FFFFFF";
 };
 
-export const debounce = <
-  T extends (...args: Parameters<any>) => ReturnType<any>
->(
-  func: T,
+export const debounce = <F extends (...args: any[]) => any>(
+  func: F,
   wait: number
-): ((...args: Parameters<T>) => void) => {
-  let timeout: NodeJS.Timeout;
+): ((...args: Parameters<F>) => ReturnType<F> | undefined) => {
+  let timeoutId: NodeJS.Timeout | undefined = undefined;
 
-  return (...args: Parameters<T>) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
+  return (...args: Parameters<F>) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    timeoutId = setTimeout(() => func(...args), wait);
   };
 };
 
