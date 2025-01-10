@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
+
 import { useState, useEffect } from "react";
 
 interface NavigationProps {
@@ -9,7 +9,6 @@ interface NavigationProps {
 }
 
 const Navigation = ({ isMobile = false }: NavigationProps) => {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
   const navItems = [

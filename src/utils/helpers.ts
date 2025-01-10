@@ -20,7 +20,9 @@ export const generateContrastColor = (hexColor: string): string => {
   return brightness > 128 ? "#000000" : "#FFFFFF";
 };
 
-export const debounce = <T extends (...args: any[]) => any>(
+export const debounce = <
+  T extends (...args: Parameters<any>) => ReturnType<any>
+>(
   func: T,
   wait: number
 ): ((...args: Parameters<T>) => void) => {

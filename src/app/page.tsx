@@ -19,7 +19,7 @@ export default function Home() {
     // Animate elements on scroll
     const sections = gsap.utils.toArray(".animate-section");
 
-    sections.forEach((section: any) => {
+    sections.forEach((section: Element) => {
       gsap.from(section, {
         opacity: 0,
         y: 50,
